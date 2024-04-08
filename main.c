@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+
+#include <pwManager.h>
+
+bool displayMenu = true;
 
 // Function to display the main menu
 void displayMainMenu() {
@@ -16,10 +21,10 @@ int main() {
     int choice;
 
     // Infinite loop until the user chooses to exit
-    while (1) {
+    while (displayMenu) {
         displayMainMenu();
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+        scanf(" %d", &choice);
 
         switch (choice) {
             case 1:
