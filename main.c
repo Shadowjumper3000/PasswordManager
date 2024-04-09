@@ -22,22 +22,21 @@ int main() {
         switch (choice) {
             case 1:
                 printf("Adding a password...\n");
-                printf("Enter the website name: \n");
+                printf("\nEnter the website name: \n");
                 scanf(" %s", websiteName);
-                printf("Enter the website URL: \n");
+                printf("\nEnter the website URL: \n");
                 scanf(" %s", URL);
-                printf("Enter the username: \n");
+                printf("\nEnter the username: \n");
                 scanf(" %s", userName);
-                printf("Enter the password: \n");
+                printf("\nEnter the password: \n");
                 scanf(" %s", password);
-                printf("Enter notes: \n");
+                printf("\nEnter notes: \n");
                 scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
                 addRecord(fileName, websiteName, URL, userName, password, notes);
                 break;
 
             case 2:
-                printf("Viewing all passwords...\n");
-                readWholeFile(fileName);
+                displayWebsiteNames(fileName);
                 break;
 
             case 3:
