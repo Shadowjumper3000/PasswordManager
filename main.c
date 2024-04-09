@@ -6,14 +6,15 @@
 #include "pw_manager.h"
 
 char fileName[100] = "pw_data.csv";
+//changes the whitespaces to underscore for notes
 
 int main() {
     bool displayMenu = true;
-    char websiteName[100], URL[100], userName[100], password[100], notes[100];
     while (displayMenu)
     {
         int choice;
-
+        char websiteName[100], URL[100], userName[100], password[100];
+        char notes[100] = "";
         displayMainMenu();
         printf("Enter your choice: ");
         scanf(" %d", &choice);
@@ -29,8 +30,8 @@ int main() {
                 scanf(" %s", userName);
                 printf("Enter the password: \n");
                 scanf(" %s", password);
-                //printf("Enter notes: \n");
-                //scanf(" %s", notes);
+                printf("Enter notes: \n");
+                scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
                 addRecord(fileName, websiteName, URL, userName, password, notes);
                 break;
 
