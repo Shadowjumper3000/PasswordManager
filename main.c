@@ -6,7 +6,6 @@
 #include "pw_manager.h"
 
 char fileName[100] = "pw_data.csv";
-//changes the whitespaces to underscore for notes
 
 int main() {
     bool displayMenu = true;
@@ -57,6 +56,4 @@ int main() {
 
     return 0;
     }
-    
-    
 }
