@@ -20,7 +20,8 @@ void displayWebsiteNames(char fileName[100]){
     for(int i=2; i<num_of_rows; i++)
     {
         char *website_name = getComponent(fileName, i, 1);
-        printf("%d. %s\n", i-1, website_name);
+        char *notes = getComponent(fileName, i, 5);
+        printf("%d. %s: %s", i-1, website_name, notes);
     }
     printf("\n");
 }
