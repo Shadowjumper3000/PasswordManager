@@ -5,13 +5,15 @@
 
 #include "pw_manager.h"
 
+char fileName[100] = "pw_data.csv";
+
 int main() {
     bool displayMenu = true;
-
     while (displayMenu)
     {
         int choice;
-
+        char websiteName[100], URL[100], userName[100], password[100];
+        char notes[100] = "";
         displayMainMenu();
         printf("Enter your choice: ");
         scanf(" %d", &choice);
@@ -19,10 +21,21 @@ int main() {
         switch (choice) {
             case 1:
                 printf("Adding a password...\n");
+                printf("\nEnter the website name: \n");
+                scanf(" %s", websiteName);
+                printf("\nEnter the website URL: \n");
+                scanf(" %s", URL);
+                printf("\nEnter the username: \n");
+                scanf(" %s", userName);
+                printf("\nEnter the password: \n");
+                scanf(" %s", password);
+                printf("\nEnter notes: \n");
+                scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
+                addRecord(fileName, websiteName, URL, userName, password, notes);
                 break;
 
             case 2:
-                printf("Viewing all passwords...\n");
+                displayWebsiteNames(fileName);
                 break;
 
             case 3:

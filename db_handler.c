@@ -88,16 +88,29 @@ void deleteRecord(char fileName[100], int LineNo) {
     }
 }
 
+int countRows(char fileName[100])
+{
+    FILE *file = fopen(fileName, "r");
+    char buffer[1000];
+    int current_line = 1;
+
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        current_line++;
+    }
+    fclose(file);
+    return current_line;
+}
+
 //allows to get/change/delete a component of a record, the interface
 //will be used to specify if its a URL, password, etc.
 char* getComponent(char fileName[100], int row, int column){
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        //perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened successfully for reading\n");
+        //printf("File opened successfully for reading\n");
 
         char *data;
         char buffer[1000];
@@ -106,14 +119,14 @@ char* getComponent(char fileName[100], int row, int column){
         for(int i = 0; i < row; i++){
             fgets(buffer, sizeof(buffer), file);
         }
-        printf("The target row is: %s\n", buffer);
+        //printf("The target row is: %s\n", buffer);
 
         if(column == 1){
             data = strtok(buffer, ",");
-            printf("The first component is: %s\n", data);
+            //printf("The first component is: %s\n", data);
         } else{
             data = strtok(buffer, ",");
-            printf("The first component is: %s\n", data);
+            //printf("The first component is: %s\n", data);
 
             for(int i = 0; i < column - 1; i++){
                 data = strtok(NULL, ",");
