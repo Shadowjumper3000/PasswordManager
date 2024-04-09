@@ -53,7 +53,6 @@ void deleteRecord(char fileName[100], int LineNo) {
         }
 
         char buffer[1000];
-        // bool keep_reading = true; unused?
         int current_line = 1;
 
         // Skip the header line (comment if not needed)
