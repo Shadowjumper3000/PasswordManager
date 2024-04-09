@@ -29,9 +29,10 @@ int main() {
                 scanf(" %s", userName);
                 printf("\nEnter the password: \n");
                 scanf(" %s", password);
+                char* encrypted = encrypt(password); //encrypt function using this line
                 printf("\nEnter notes: \n");
                 scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
-                addRecord(fileName, websiteName, URL, userName, password, notes);
+                addRecord(fileName, websiteName, URL, userName, encrypted, notes);
                 break;
 
             case 2:
@@ -40,6 +41,8 @@ int main() {
 
             case 3:
                 printf("Searching for a password...\n");
+
+                //char* decrypted = decrypt(password); decrypt function using this line
                 break;
 
             case 4:

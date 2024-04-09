@@ -14,7 +14,7 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
 int countRows(char fileName[100]);
 
 //pw_encryption.c
-void encryptPassword(char* password, int key);
-void decryptPassword(char* password, int key);
+char* encrypt(char* password);
+char* decrypt(char* password);
 
 #endif
