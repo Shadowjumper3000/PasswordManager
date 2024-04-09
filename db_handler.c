@@ -133,7 +133,7 @@ char* getComponent(char fileName[100], int row, int column){
         }
 
         fclose(file);
-        printf("The final output is: %s\n", data);
+        //printf("The final output is: %s\n", data);
         return data;
     }
 }
