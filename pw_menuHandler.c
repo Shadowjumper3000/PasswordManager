@@ -25,3 +25,27 @@ void displayWebsiteNames(char fileName[100]){
     }
     printf("\n");
 }
+
+void addingPassword(char fileName[100]){
+    char websiteName[100], URL[100], userName[100], password[100];
+    char notes[100] = "";
+    printf("Adding a password...\n");
+    printf("\nEnter the website name: \n");
+    scanf(" %s", websiteName);
+    printf("\nEnter the website URL: \n");
+    scanf(" %s", URL);
+    printf("\nEnter the username: \n");
+    scanf(" %s", userName);
+    printf("\nEnter the password: \n");
+    scanf(" %s", password);
+    char* encrypted = encrypt(password); //encrypt function using this line
+    printf("\nEnter notes: \n");
+    scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
+    addRecord(fileName, websiteName, URL, userName, encrypted, notes);
+    free(encrypted);
+    free(websiteName);
+    free(URL);
+    free(userName);
+    free(password);
+    free(notes);
+}

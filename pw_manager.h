@@ -4,6 +4,7 @@
 //pw_menuHandler.c
 void displayMainMenu();
 void displayWebsiteNames(char fileName[100]);
+void addingPassword();
 
 //db_handler.c
 void readWholeFile(char fileName[100]);
