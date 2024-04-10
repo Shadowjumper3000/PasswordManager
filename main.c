@@ -12,29 +12,15 @@ int main() {
     while (displayMenu)
     {
         int choice;
-        char websiteName[100], URL[100], userName[100], password[100];
-        char notes[100] = "";
         displayMainMenu();
+
         printf("Enter your choice: ");
         scanf(" %d", &choice);
 
         switch (choice) {
             case 1:
-                printf("Adding a password...\n");
-                printf("\nEnter the website name: \n");
-                scanf(" %s", websiteName);
-                printf("\nEnter the website URL: \n");
-                scanf(" %s", URL);
-                printf("\nEnter the username: \n");
-                scanf(" %s", userName);
-                printf("\nEnter the password: \n");
-                scanf(" %s", password);
-                char* encrypted = encrypt(password); //encrypt function using this line
-                printf("\nEnter notes: \n");
-                scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
-                addRecord(fileName, websiteName, URL, userName, encrypted, notes);
+                addingPassword(fileName);
                 break;
-
             case 2:
                 displayWebsiteNames(fileName);
                 break;
@@ -51,7 +37,8 @@ int main() {
 
             case 5:
                 printf("Exiting the password manager...\n");
-                exit(0);
+                displayMenu = false;
+                break;
 
             default:
                 printf("Invalid choice. Please try again.\n");
@@ -59,4 +46,14 @@ int main() {
     }
 
     return 0;
+}
+
+// Function to display the main menu
+void displayMainMenu() {
+    printf("\n--- Password Manager ---\n");
+    printf("1. Add a password\n");
+    printf("2. View all passwords\n");
+    printf("3. Search for a password\n");
+    printf("4. Delete a password\n");
+    printf("5. Exit\n");
 }

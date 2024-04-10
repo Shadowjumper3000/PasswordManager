@@ -4,16 +4,6 @@
 #include <stdbool.h>
 #include "pw_manager.h"
 
-// Function to display the main menu
-void displayMainMenu() {
-    printf("\n--- Password Manager ---\n");
-    printf("1. Add a password\n");
-    printf("2. View all passwords\n");
-    printf("3. Search for a password\n");
-    printf("4. Delete a password\n");
-    printf("5. Exit\n");
-}
-
 void displayWebsiteNames(char fileName[100]){
     printf("\n\nYour Websites:\n\n");
     int num_of_rows = countRows(fileName);
@@ -42,10 +32,4 @@ void addingPassword(char fileName[100]){
     printf("\nEnter notes: \n");
     scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
     addRecord(fileName, websiteName, URL, userName, encrypted, notes);
-    free(encrypted);
-    free(websiteName);
-    free(URL);
-    free(userName);
-    free(password);
-    free(notes);
 }
