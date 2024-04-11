@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-void readWholeFile(char fileName[100]){
+void db_readWholeFile(char fileName[100]){
     FILE *file = fopen(fileName, "r");
     if(file == NULL){
         perror("Error opening file");
@@ -21,7 +21,7 @@ void readWholeFile(char fileName[100]){
     fclose(file);
 }
 
-void addRecord(char fileName[100], char websiteName[100], char URL[100], char userName[100], char password[100], char notes[100]){
+void db_addRecord(char fileName[100], char websiteName[100], char URL[100], char userName[100], char password[100], char notes[100]){
     FILE *file = fopen(fileName, "a");
     if(file == NULL){
         perror("Error opening file");
@@ -34,7 +34,7 @@ void addRecord(char fileName[100], char websiteName[100], char URL[100], char us
     fclose(file);
 }
 
-void deleteRecord(char fileName[100], int LineNo) {
+void db_deleteRecord(char fileName[100], int LineNo) {
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
@@ -87,7 +87,7 @@ void deleteRecord(char fileName[100], int LineNo) {
     }
 }
 //function to get the amount of rows of the csv document at the current state
-int countRows(char fileName[100])
+int db_countRows(char fileName[100])
 {
     FILE *file = fopen(fileName, "r");
     char buffer[1000];
@@ -102,7 +102,7 @@ int countRows(char fileName[100])
 
 //allows to get/change/delete a component of a record, the interface
 //will be used to specify if its a URL, password, etc.
-char* getComponent(char fileName[100], int row, int column){
+char* db_getComponent(char fileName[100], int row, int column){
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
@@ -138,7 +138,7 @@ char* getComponent(char fileName[100], int row, int column){
     }
 }
 //can be used as delete by changing the component to spaces
-void changeComponent(char fileName[100], char changedComponent[100], int row, int column){
+void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column){
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
@@ -207,7 +207,7 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
 }
 
 //This function outputs the number of the row where the website needed is, if the website couldn be found it outputs a 0
-int find_row(char fileName[100], char website_name[100]){
+int db_find_row(char fileName[100], char website_name[100]){
     char text_line[500], *token;
 
     FILE *file = fopen(fileName, "r");

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#include "pw_manager.h"
+#include "functions.h"
 
 char fileName[100] = "pw_data.csv";
 
@@ -19,10 +19,10 @@ int main(){
 
         switch (choice) {
             case 1:
-                addingPassword(fileName);
+                mh_addingPassword(fileName);
                 break;
             case 2:
-                displayWebsiteNames(fileName);
+                mh_displayWebsiteNames(fileName);
                 break;
 
             case 3:
@@ -37,7 +37,7 @@ int main(){
             
             case 5:
                 printf("Modifying a password...\n");
-                changePassword(fileName);
+                mh_changePassword(fileName);
                 break;
                 
             case 0:
