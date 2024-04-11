@@ -206,6 +206,41 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
     }
 }
 
+//This function outputs the number of the row where the website needed is, if the website couldn be found it outputs a 0
+int find_row(char website_name[]){
+    int row_number = 0;
+    char text_line[500], *token;
+
+    FILE *file = fopen("pw_data.csv", "r");
+    if(file == NULL){
+        printf("\nERROR - File could not be found\n");
+        return -1;
+    }else{
+        fgets(text_line, sizeof(text_line), file);
+        token = strtok(text_line,",");
+
+        while(!feof(file)){
+            fgets(text_line, sizeof(text_line), file);
+            token = strtok(text_line,",");
+            /*printf("%s", token);
+            getchar();*/
+            row_number = row_number + 1;
+            
+            token = strupr(token);
+            website_name = strupr(website_name);
+
+            if(!strcmp(website_name, token)){
+                break;
+            }
+            if(feof(file)){
+                row_number = 0;
+            }
+        }
+        fclose(file);
+        return row_number;
+    }
+}
+
 //csv testing data:
 // Website name,URL,User name,Password,Notes
 // Google,http://www.google.com,myname,mypassword,My google acocunt

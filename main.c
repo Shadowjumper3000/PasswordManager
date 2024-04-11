@@ -7,7 +7,7 @@
 
 char fileName[100] = "pw_data.csv";
 
-int main() {
+int main(){
     bool displayMenu = true;
     while (displayMenu)
     {
@@ -34,8 +34,12 @@ int main() {
             case 4:
                 printf("Deleting a password...\n");
                 break;
-
+            
             case 5:
+                printf("Modifying a password...\n");
+                break;
+                
+            case 0:
                 printf("Exiting the password manager...\n");
                 displayMenu = false;
                 break;
@@ -55,5 +59,5 @@ void displayMainMenu() {
     printf("2. View all passwords\n");
     printf("3. Search for a password\n");
     printf("4. Delete a password\n");
-    printf("5. Exit\n");
+    printf("0. Exit\n");
 }

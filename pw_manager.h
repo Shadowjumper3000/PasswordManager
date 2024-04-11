@@ -13,6 +13,7 @@ void deleteRecord(char fileName[100], int LineNo);
 char* getComponent(char fileName[100], int row, int col);
 void changeComponent(char fileName[100], char changedComponent[100], int row, int column);
 int countRows(char fileName[100]);
+int find_row(char website_name[]);
 
 //pw_encryption.c
 char* encrypt(char* password);
