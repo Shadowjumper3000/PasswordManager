@@ -22,17 +22,25 @@ void mh_addingPassword(char fileName[100]){
     printf("Adding a password...\n");
     printf("\nEnter the website name: \n");
     scanf(" %s", websiteName);
-    printf("\nEnter the website URL: \n");
-    scanf(" %s", URL);
-    printf("\nEnter the username: \n");
-    scanf(" %s", userName);
-    printf("\nEnter the password: \n");
-    scanf(" %s", password);
-    char* encrypted = pw_encrypt(password); //encrypt function using this line
-    printf("\nEnter notes: \n");
-    scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
-    db_addRecord(fileName, websiteName, URL, userName, encrypted, notes);
-    free(encrypted);
+    int row = db_find_row(fileName, websiteName);
+    if(row == 0)
+    {
+        printf("\nEnter the website URL: \n");
+        scanf(" %s", URL);
+        printf("\nEnter the username: \n");
+        scanf(" %s", userName);
+        printf("\nEnter the password: \n");
+        scanf(" %s", password);
+        char* encrypted = pw_encrypt(password); //encrypt function using this line
+        printf("\nEnter notes: \n");
+        scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
+        db_addRecord(fileName, websiteName, URL, userName, encrypted, notes);
+        free(encrypted);
+    }
+    else
+    {
+        printf("This website name is already being used in the database. Try again.\n");
+    }
 }
 
 void mh_changePassword(char fileName[100]){
