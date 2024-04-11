@@ -86,7 +86,7 @@ void deleteRecord(char fileName[100], int LineNo) {
         fclose(temp);
     }
 }
-
+//function to get the amount of rows of the csv document at the current state
 int countRows(char fileName[100])
 {
     FILE *file = fopen(fileName, "r");
@@ -207,16 +207,16 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
 }
 
 //This function outputs the number of the row where the website needed is, if the website couldn be found it outputs a 0
-int find_row(char website_name[]){
-    int row_number = 0;
+int find_row(char fileName[100], char website_name[100]){
     char text_line[500], *token;
 
-    FILE *file = fopen("pw_data.csv", "r");
+    FILE *file = fopen(fileName, "r");
     if(file == NULL){
         printf("\nERROR - File could not be found\n");
         return -1;
     }else{
         fgets(text_line, sizeof(text_line), file);
+        int row_number = 1;
         token = strtok(text_line,",");
 
         while(!feof(file)){

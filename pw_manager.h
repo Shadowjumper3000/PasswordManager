@@ -1,10 +1,13 @@
 #ifndef PW_MANAGER_H
 #define PW_MANAGER_H
 
-//pw_menuHandler.c
+//main.c
 void displayMainMenu();
+
+//pw_menuHandler.c
 void displayWebsiteNames(char fileName[100]);
-void addingPassword();
+void addingPassword(char fileName[100]);
+void changePassword(char fileName[100]);
 
 //db_handler.c
 void readWholeFile(char fileName[100]);
@@ -13,7 +16,7 @@ void deleteRecord(char fileName[100], int LineNo);
 char* getComponent(char fileName[100], int row, int col);
 void changeComponent(char fileName[100], char changedComponent[100], int row, int column);
 int countRows(char fileName[100]);
-int find_row(char website_name[]);
+int find_row(char fileName[100], char website_name[100]);
 
 //pw_encryption.c
 char* encrypt(char* password);

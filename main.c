@@ -37,6 +37,7 @@ int main(){
             
             case 5:
                 printf("Modifying a password...\n");
+                changePassword(fileName);
                 break;
                 
             case 0:
@@ -59,5 +60,6 @@ void displayMainMenu() {
     printf("2. View all passwords\n");
     printf("3. Search for a password\n");
     printf("4. Delete a password\n");
+    printf("5. Modify a password\n");
     printf("0. Exit\n");
 }
