@@ -4,7 +4,7 @@
 
 #define key 5
 
-char* encrypt(const char* message) {
+char* pw_encrypt(const char* message) {
     size_t length = strlen(message);
     char* encrypted = (char*)malloc((length + 1) * sizeof(char));
 
@@ -22,7 +22,7 @@ char* encrypt(const char* message) {
     return encrypted;
 }
 
-char* decrypt(const char* encrypted) {
+char* pw_decrypt(const char* encrypted) {
     size_t length = strlen(encrypted);
     char* decrypted = (char*)malloc((length + 1) * sizeof(char));
 

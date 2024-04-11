@@ -3,13 +3,15 @@
 #include <string.h>
 #include <stdbool.h>
 
-void readWholeFile(char fileName[100]){
+extern bool VERBOSE;
+
+void db_readWholeFile(char fileName[100]){
     FILE *file = fopen(fileName, "r");
     if(file == NULL){
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened succesfully for reading \n");
+        if(VERBOSE)printf("File opened succesfully for reading \n");
     }
 
     //will read the whole file
@@ -21,35 +23,35 @@ void readWholeFile(char fileName[100]){
     fclose(file);
 }
 
-void addRecord(char fileName[100], char websiteName[100], char URL[100], char userName[100], char password[100], char notes[100]){
+void db_addRecord(char fileName[100], char websiteName[100], char URL[100], char userName[100], char password[100], char notes[100]){
     FILE *file = fopen(fileName, "a");
     if(file == NULL){
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened succesfully for appending\n");
+        if(VERBOSE)printf("File opened succesfully for appending\n");
     }
 
     fprintf(file, "\n%s,%s,%s,%s,%s", websiteName, URL, userName, password, notes);
     fclose(file);
 }
 
-void deleteRecord(char fileName[100], int LineNo) {
+void db_deleteRecord(char fileName[100], int LineNo) {
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         temp = tmpfile();
         if (temp == NULL) {
-            perror("Error creating temporary file");
+            if(VERBOSE)perror("Error creating temporary file");
             exit(-1);
         } else {
-            printf("Temporary file created successfully\n");
+            if(VERBOSE)printf("Temporary file created successfully\n");
         }
 
         char buffer[1000];
@@ -72,10 +74,10 @@ void deleteRecord(char fileName[100], int LineNo) {
 
         file = fopen(fileName, "w");
         if (file == NULL) {
-            perror("Error opening file for writing");
+            if(VERBOSE)perror("Error opening file for writing");
             exit(-1);
         } else {
-            printf("File opened successfully for writing\n");
+            if(VERBOSE)printf("File opened successfully for writing\n");
         }
 
         while (fgets(buffer, sizeof(buffer), temp) != NULL) {
@@ -86,8 +88,8 @@ void deleteRecord(char fileName[100], int LineNo) {
         fclose(temp);
     }
 }
-
-int countRows(char fileName[100])
+//function to get the amount of rows of the csv document at the current state
+int db_countRows(char fileName[100])
 {
     FILE *file = fopen(fileName, "r");
     char buffer[1000];
@@ -102,14 +104,14 @@ int countRows(char fileName[100])
 
 //allows to get/change/delete a component of a record, the interface
 //will be used to specify if its a URL, password, etc.
-char* getComponent(char fileName[100], int row, int column){
+char* db_getComponent(char fileName[100], int row, int column){
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        //perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        //printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         char *data;
         char buffer[1000];
@@ -118,14 +120,14 @@ char* getComponent(char fileName[100], int row, int column){
         for(int i = 0; i < row; i++){
             fgets(buffer, sizeof(buffer), file);
         }
-        //printf("The target row is: %s\n", buffer);
+        if(VERBOSE)printf("The target row is: %s\n", buffer);
 
         if(column == 1){
             data = strtok(buffer, ",");
-            //printf("The first component is: %s\n", data);
+            if(VERBOSE)printf("The first component is: %s\n", data);
         } else{
             data = strtok(buffer, ",");
-            //printf("The first component is: %s\n", data);
+            if(VERBOSE)printf("The first component is: %s\n", data);
 
             for(int i = 0; i < column - 1; i++){
                 data = strtok(NULL, ",");
@@ -133,27 +135,27 @@ char* getComponent(char fileName[100], int row, int column){
         }
 
         fclose(file);
-        //printf("The final output is: %s\n", data);
+        if(VERBOSE)printf("The final output is: %s\n", data);
         return data;
     }
 }
 //can be used as delete by changing the component to spaces
-void changeComponent(char fileName[100], char changedComponent[100], int row, int column){
+void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column){
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         temp = tmpfile();
         if (temp == NULL) {
-            perror("Error creating temporary file");
+            if(VERBOSE)perror("Error creating temporary file");
             exit(-1);
         } else {
-            printf("Temporary file created successfully\n");
+            if(VERBOSE)printf("Temporary file created successfully\n");
         }
 
         char buffer[1000];
@@ -173,7 +175,6 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
                         printf("The component has been changed\n");
                     }
                 } else if(currentColumn == 4){
-                    // printf("CurrColl is equal to 5 so that thing shuld die\n");
                     fprintf(temp, "%s", data);
                 } else {
                     fprintf(temp, "%s,", data);
@@ -182,7 +183,7 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
                 data = strtok(NULL, ",");
                 currentColumn++;
             }
-            // fprintf(temp, "\n");
+            //fprintf(temp, "\n");
             currentRow++;
         }
 
@@ -191,10 +192,10 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
 
         file = fopen(fileName, "w");
         if (file == NULL) {
-            perror("Error opening file for writing");
+            if(VERBOSE)perror("Error opening file for writing");
             exit(-1);
         } else {
-            printf("File opened successfully for writing\n");
+            if(VERBOSE)printf("File opened successfully for writing\n");
         }
 
         while (fgets(buffer, sizeof(buffer), temp) != NULL) {
@@ -207,16 +208,16 @@ void changeComponent(char fileName[100], char changedComponent[100], int row, in
 }
 
 //This function outputs the number of the row where the website needed is, if the website couldn be found it outputs a 0
-int find_row(char website_name[]){
-    int row_number = 0;
+int db_find_row(char fileName[100], char website_name[100]){
     char text_line[500], *token;
 
-    FILE *file = fopen("pw_data.csv", "r");
+    FILE *file = fopen(fileName, "r");
     if(file == NULL){
-        printf("\nERROR - File could not be found\n");
+        if(VERBOSE)printf("\nERROR - File could not be found\n");
         return -1;
     }else{
         fgets(text_line, sizeof(text_line), file);
+        int row_number = 1;
         token = strtok(text_line,",");
 
         while(!feof(file)){
