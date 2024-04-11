@@ -3,13 +3,15 @@
 #include <string.h>
 #include <stdbool.h>
 
+extern bool VERBOSE;
+
 void db_readWholeFile(char fileName[100]){
     FILE *file = fopen(fileName, "r");
     if(file == NULL){
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened succesfully for reading \n");
+        if(VERBOSE)printf("File opened succesfully for reading \n");
     }
 
     //will read the whole file
@@ -24,10 +26,10 @@ void db_readWholeFile(char fileName[100]){
 void db_addRecord(char fileName[100], char websiteName[100], char URL[100], char userName[100], char password[100], char notes[100]){
     FILE *file = fopen(fileName, "a");
     if(file == NULL){
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened succesfully for appending\n");
+        if(VERBOSE)printf("File opened succesfully for appending\n");
     }
 
     fprintf(file, "\n%s,%s,%s,%s,%s", websiteName, URL, userName, password, notes);
@@ -39,17 +41,17 @@ void db_deleteRecord(char fileName[100], int LineNo) {
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         temp = tmpfile();
         if (temp == NULL) {
-            perror("Error creating temporary file");
+            if(VERBOSE)perror("Error creating temporary file");
             exit(-1);
         } else {
-            printf("Temporary file created successfully\n");
+            if(VERBOSE)printf("Temporary file created successfully\n");
         }
 
         char buffer[1000];
@@ -72,10 +74,10 @@ void db_deleteRecord(char fileName[100], int LineNo) {
 
         file = fopen(fileName, "w");
         if (file == NULL) {
-            perror("Error opening file for writing");
+            if(VERBOSE)perror("Error opening file for writing");
             exit(-1);
         } else {
-            printf("File opened successfully for writing\n");
+            if(VERBOSE)printf("File opened successfully for writing\n");
         }
 
         while (fgets(buffer, sizeof(buffer), temp) != NULL) {
@@ -106,10 +108,10 @@ char* db_getComponent(char fileName[100], int row, int column){
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        //perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        //printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         char *data;
         char buffer[1000];
@@ -118,14 +120,14 @@ char* db_getComponent(char fileName[100], int row, int column){
         for(int i = 0; i < row; i++){
             fgets(buffer, sizeof(buffer), file);
         }
-        //printf("The target row is: %s\n", buffer);
+        if(VERBOSE)printf("The target row is: %s\n", buffer);
 
         if(column == 1){
             data = strtok(buffer, ",");
-            //printf("The first component is: %s\n", data);
+            if(VERBOSE)printf("The first component is: %s\n", data);
         } else{
             data = strtok(buffer, ",");
-            //printf("The first component is: %s\n", data);
+            if(VERBOSE)printf("The first component is: %s\n", data);
 
             for(int i = 0; i < column - 1; i++){
                 data = strtok(NULL, ",");
@@ -133,7 +135,7 @@ char* db_getComponent(char fileName[100], int row, int column){
         }
 
         fclose(file);
-        //printf("The final output is: %s\n", data);
+        if(VERBOSE)printf("The final output is: %s\n", data);
         return data;
     }
 }
@@ -143,17 +145,17 @@ void db_changeComponent(char fileName[100], char changedComponent[100], int row,
     FILE *file = fopen(fileName, "r");
 
     if (file == NULL) {
-        perror("Error opening file");
+        if(VERBOSE)perror("Error opening file");
         exit(-1);
     } else {
-        printf("File opened successfully for reading\n");
+        if(VERBOSE)printf("File opened successfully for reading\n");
 
         temp = tmpfile();
         if (temp == NULL) {
-            perror("Error creating temporary file");
+            if(VERBOSE)perror("Error creating temporary file");
             exit(-1);
         } else {
-            printf("Temporary file created successfully\n");
+            if(VERBOSE)printf("Temporary file created successfully\n");
         }
 
         char buffer[1000];
@@ -173,7 +175,6 @@ void db_changeComponent(char fileName[100], char changedComponent[100], int row,
                         printf("The component has been changed\n");
                     }
                 } else if(currentColumn == 4){
-                    // printf("CurrColl is equal to 5 so that thing shuld die\n");
                     fprintf(temp, "%s", data);
                 } else {
                     fprintf(temp, "%s,", data);
@@ -182,7 +183,7 @@ void db_changeComponent(char fileName[100], char changedComponent[100], int row,
                 data = strtok(NULL, ",");
                 currentColumn++;
             }
-            // fprintf(temp, "\n");
+            //fprintf(temp, "\n");
             currentRow++;
         }
 
@@ -191,10 +192,10 @@ void db_changeComponent(char fileName[100], char changedComponent[100], int row,
 
         file = fopen(fileName, "w");
         if (file == NULL) {
-            perror("Error opening file for writing");
+            if(VERBOSE)perror("Error opening file for writing");
             exit(-1);
         } else {
-            printf("File opened successfully for writing\n");
+            if(VERBOSE)printf("File opened successfully for writing\n");
         }
 
         while (fgets(buffer, sizeof(buffer), temp) != NULL) {
@@ -212,7 +213,7 @@ int db_find_row(char fileName[100], char website_name[100]){
 
     FILE *file = fopen(fileName, "r");
     if(file == NULL){
-        printf("\nERROR - File could not be found\n");
+        if(VERBOSE)printf("\nERROR - File could not be found\n");
         return -1;
     }else{
         fgets(text_line, sizeof(text_line), file);

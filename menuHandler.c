@@ -32,6 +32,7 @@ void mh_addingPassword(char fileName[100]){
     printf("\nEnter notes: \n");
     scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
     db_addRecord(fileName, websiteName, URL, userName, encrypted, notes);
+    free(encrypted);
 }
 
 void mh_changePassword(char fileName[100]){
@@ -50,5 +51,6 @@ void mh_changePassword(char fileName[100]){
         scanf(" %s", newPassword);
         char* encrypted_new_pw = pw_encrypt(newPassword);
         db_changeComponent(fileName, encrypted_new_pw, row, 4);
+        free(encrypted_new_pw);
     }
 }

@@ -5,6 +5,8 @@
 
 #include "functions.h"
 
+bool VERBOSE = false;
+
 char fileName[100] = "pw_data.csv";
 
 int main(){
