@@ -63,10 +63,10 @@ void db_deleteRecord(char fileName[100], int LineNo) {
 
         // Process data lines
         while (fgets(buffer, sizeof(buffer), file) != NULL) {
+            current_line++;
             if (current_line != LineNo) {
                 fputs(buffer, temp);
             }
-            current_line++;
         }    
 
         fclose(file);

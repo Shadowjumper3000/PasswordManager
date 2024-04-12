@@ -8,6 +8,7 @@ void displayMainMenu();
 void mh_displayWebsiteNames(char fileName[100]);
 void mh_addingPassword(char fileName[100]);
 void mh_changePassword(char fileName[100]);
+void mh_deletePassword(char fileName[100]);
 
 //db_handler.c
 void db_readWholeFile(char fileName[100]);

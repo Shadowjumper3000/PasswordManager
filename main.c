@@ -34,7 +34,7 @@ int main(){
                 break;
 
             case 4:
-                printf("Deleting a password...\n");
+                mh_deletePassword(fileName);
                 break;
             
             case 5:
