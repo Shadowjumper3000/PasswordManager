@@ -38,7 +38,6 @@ int main(){
                 break;
             
             case 5:
-                printf("Modifying a password...\n");
                 mh_changePassword(fileName);
                 break;
                 

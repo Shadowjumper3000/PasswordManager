@@ -5,6 +5,20 @@
 
 extern bool VERBOSE;
 
+//function to get the amount of rows of the csv document at the current state
+int db_countRows(char fileName[100])
+{
+    FILE *file = fopen(fileName, "r");
+    char buffer[1000];
+    int current_line = 0;
+
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        current_line++;
+    }
+    fclose(file);
+    return current_line;
+}
+
 void db_readWholeFile(char fileName[100]){
     FILE *file = fopen(fileName, "r");
     if(file == NULL){
@@ -37,6 +51,10 @@ void db_addRecord(char fileName[100], char websiteName[100], char URL[100], char
 }
 
 void db_deleteRecord(char fileName[100], int LineNo) {
+    //USED FOR LATER
+    int max_rows = db_countRows(fileName);
+    printf("MAX ROWS: %d\n", max_rows);
+
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
@@ -79,27 +97,13 @@ void db_deleteRecord(char fileName[100], int LineNo) {
         } else {
             if(VERBOSE)printf("File opened successfully for writing\n");
         }
-
+        
         while (fgets(buffer, sizeof(buffer), temp) != NULL) {
             fputs(buffer, file);
         }
-
         fclose(file);
         fclose(temp);
     }
-}
-//function to get the amount of rows of the csv document at the current state
-int db_countRows(char fileName[100])
-{
-    FILE *file = fopen(fileName, "r");
-    char buffer[1000];
-    int current_line = 1;
-
-    while (fgets(buffer, sizeof(buffer), file) != NULL) {
-        current_line++;
-    }
-    fclose(file);
-    return current_line;
 }
 
 //allows to get/change/delete a component of a record, the interface

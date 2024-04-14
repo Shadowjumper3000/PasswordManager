@@ -7,11 +7,15 @@
 void mh_displayWebsiteNames(char fileName[100]){
     printf("\n\nYour Websites:\n\n");
     int num_of_rows = db_countRows(fileName);
-    for(int i=2; i<num_of_rows; i++)
+    for(int i=2; i<num_of_rows+1; i++)
     {
         char *website_name = db_getComponent(fileName, i, 1);
+        char *user_name = db_getComponent(fileName, i, 3);
         char *notes = db_getComponent(fileName, i, 5);
-        printf("%d. %s: %s", i-1, website_name, notes);
+        if (website_name == NULL || user_name == NULL || notes == NULL){
+            //pass if any of them is null (used to avoid displaying blank lines)
+        }
+        else printf("%s: %s - %s", website_name, user_name ,notes);
     }
     printf("\n");
 }
@@ -20,19 +24,19 @@ void mh_addingPassword(char fileName[100]){
     char websiteName[100], URL[100], userName[100], password[100];
     char notes[100] = "";
     printf("Adding a password...\n");
-    printf("\nEnter the website name: \n");
+    printf("\nEnter the website name (one word): \n");
     scanf(" %s", websiteName);
     int row = db_find_row(fileName, websiteName);
     if(row == 0)
     {
-        printf("\nEnter the website URL: \n");
+        printf("\nEnter the website URL [one word]: \n");
         scanf(" %s", URL);
-        printf("\nEnter the username: \n");
+        printf("\nEnter the username [one word]: \n");
         scanf(" %s", userName);
-        printf("\nEnter the password: \n");
+        printf("\nEnter the password [one word]: \n");
         scanf(" %s", password);
         char* encrypted = pw_encrypt(password); //encrypt function using this line
-        printf("\nEnter notes: \n");
+        printf("\nEnter notes [may be multiple words]: \n");
         scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
         db_addRecord(fileName, websiteName, URL, userName, encrypted, notes);
         free(encrypted);
@@ -45,6 +49,7 @@ void mh_addingPassword(char fileName[100]){
 
 void mh_changePassword(char fileName[100]){
     char websiteName[100];
+    printf("\n\nModifying a password...\n");
     printf("For which website do you want to change your password? (Enter the website name): \n");
     scanf(" %s", websiteName);
     int row = db_find_row(fileName, websiteName);
@@ -69,8 +74,7 @@ void mh_deletePassword(char fileName[100]){
     printf("Which website would you want to delete the pasword of your account from?(this also eliminates all information with it, so be careful ;D): ");
     scanf(" %s", websiteName);
     int row = db_find_row(fileName, websiteName);
-    printf("The row of %s %d", websiteName, row);
-    if(row <= 0){ //I dont know but it crashes when "intro" is pressed as an answer (and this doesnt fix it).
+    if(row <= 0){ 
         printf("This website does not exist in the database. Try again.");
 
     }else{
