@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <unistd.h>
 #include "functions.h"
 
 void mh_displayWebsiteNames(char fileName[100]){
@@ -85,6 +86,7 @@ void mh_deletePassword(char fileName[100]){
             case 1:
                 db_deleteRecord(fileName, row);
                 printf("\nAll the data from %s has been succesfully eliminated\n\n", websiteName);
+                db_removeEmptyLines(fileName);
                 break;
             case 2:
                 printf("\nOk, no problem, we are stoping the process...\n\n");
@@ -92,6 +94,28 @@ void mh_deletePassword(char fileName[100]){
             default:
                 printf("\nERROR - That was not a valid option\n\n");
                 break;
+        }
+    }
+}
+
+void mh_searchPassword(char fileName[100]){
+    char website_name[100];
+    printf("\nSearching for a password...\n\n");
+    printf("Which website would you want to know the pasword of your account for?: ");
+    scanf(" %s", website_name);
+
+    if(website_name[0] == '\0'){
+        printf("\nThat is not a valid name for a webpage\n\n");
+
+    }else{
+        strcpy(website_name, strtok(website_name, "\n"));
+        int row_number = db_find_row(fileName, website_name);
+        if(row_number > 0){
+            char *enc_password = db_getComponent(fileName, row_number, 4);
+            char *decrypted = pw_decrypt(enc_password);
+            printf("\nThe password for %s is %s\n\n\n", website_name, decrypted);
+        }else{
+            printf("\nERROR - The webpage was not found (Make sure that you already have an account for that webpage)\n\n\n");
         }
     }
 }

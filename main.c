@@ -28,9 +28,7 @@ int main(){
                 break;
 
             case 3:
-                printf("Searching for a password...\n");
-
-                //char* decrypted = decrypt(password); decrypt function using this line
+                mh_searchPassword(fileName);
                 break;
 
             case 4:
