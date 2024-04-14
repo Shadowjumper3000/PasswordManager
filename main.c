@@ -28,17 +28,14 @@ int main(){
                 break;
 
             case 3:
-                printf("Searching for a password...\n");
-
-                //char* decrypted = decrypt(password); decrypt function using this line
+                mh_searchPassword(fileName);
                 break;
 
             case 4:
-                printf("Deleting a password...\n");
+                mh_deletePassword(fileName);
                 break;
             
             case 5:
-                printf("Modifying a password...\n");
                 mh_changePassword(fileName);
                 break;
                 

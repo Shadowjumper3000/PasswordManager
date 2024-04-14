@@ -8,6 +8,8 @@ void displayMainMenu();
 void mh_displayWebsiteNames(char fileName[100]);
 void mh_addingPassword(char fileName[100]);
 void mh_changePassword(char fileName[100]);
+void mh_deletePassword(char fileName[100]);
+void mh_searchPassword(char fileName[100]);
 
 //db_handler.c
 void db_readWholeFile(char fileName[100]);
@@ -17,6 +19,7 @@ char* db_getComponent(char fileName[100], int row, int col);
 void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column);
 int db_countRows(char fileName[100]);
 int db_find_row(char fileName[100], char website_name[100]);
+void db_removeEmptyLines(char fileName[100]);
 
 //pw_encryption.c
 char* pw_encrypt(char* password);
