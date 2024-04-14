@@ -24,7 +24,7 @@ void mh_addingPassword(char fileName[100]){
     char websiteName[100], URL[100], userName[100], password[100];
     char notes[100] = "";
     printf("Adding a password...\n");
-    printf("\nEnter the website name (one word): \n");
+    printf("\nEnter the website name [one word]: \n");
     scanf(" %s", websiteName);
     int row = db_find_row(fileName, websiteName);
     if(row == 0)
