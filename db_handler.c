@@ -128,6 +128,20 @@ char* db_getComponent(char fileName[100], int row, int column){
 }
 //can be used as delete by changing the component to spaces
 void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column){
+
+    bool hasSpace = false;
+    for(int i = 0; i < 100; i++){
+        if(changedComponent[i] == ' '){
+            hasSpace = true;
+            break;
+        }
+    }
+
+    if(hasSpace){
+        printf("The component cannot contain spaces\n");
+        return;  
+    }
+
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
