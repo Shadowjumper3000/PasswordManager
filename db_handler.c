@@ -242,6 +242,9 @@ int db_find_row(char fileName[100], char website_name[100]){
                 row_number = 0;
             }
         }
+        if(feof(file)){
+            row_number = 0;
+        }
         fclose(file);
         return row_number;
     }
@@ -264,7 +267,7 @@ void db_removeEmptyLines(char fileName[100]) {
     }
 
     // Buffer to read each line from the file
-    char buffer[100];
+    char buffer[1000];
 
     // Iterate through each line in the file
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
