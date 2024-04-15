@@ -30,41 +30,43 @@ int main(){
         printf("File pw_data.csv exists\n");
     }
 
-    int choice;
+    char choice;
     bool displayMenu = true;
     while (displayMenu)
     {
+        fflush(stdin);
         displayMainMenu();
 
         printf("Enter your choice: ");
-        scanf(" %i", &choice);
+        scanf("%c", &choice);
 
         switch (choice) {
-            case 1:
+            case '1':
                 mh_addingPassword(fileName);
                 break;
-            case 2:
+            case '2':
                 mh_displayWebsiteNames(fileName);
                 break;
 
-            case 3:
+            case '3':
                 mh_searchPassword(fileName);
                 break;
 
-            case 4:
+            case '4':
                 mh_deletePassword(fileName);
                 break;
-            
-            case 5:
+
+            case '5':
                 mh_changePassword(fileName);
                 break;
-                
-            case 0:
-                printf("Exiting the password manager...\n");
+
+            case '0':
+                printf("\nExiting the password manager...\n");
                 displayMenu = false;
                 break;
+
             default:
-                printf("Invalid choice. Please try again.\n");
+                printf("\nInvalid choice. Please try again.\n");
         }
     }
 
