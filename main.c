@@ -79,5 +79,5 @@ void displayMainMenu() {
     printf("3. Search for a password\n");
     printf("4. Delete a password\n");
     printf("5. Modify a password\n");
-    printf("0. Exit\n");
+    printf("0. Exit\n\n");
 }
