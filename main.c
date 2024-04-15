@@ -10,6 +10,26 @@ bool VERBOSE = false;
 char fileName[100] = "pw_data.csv";
 
 int main(){
+
+    //Checks if pw_data.csv file exists and if not it creates it and formats it
+    if(fopen(fileName, "r") == NULL){
+        printf("File doesn't exist, creating file pw_data.csv\n");
+
+        FILE *file = fopen(fileName, "w");
+
+        if(file == NULL){
+            printf("Error creating file\n");
+        } else {
+            fprintf(file, "%s,%s,%s,%s,%s", "websiteName", "URL", "userName", "password", "notes");
+            fclose(file);
+
+            printf("File successfully created and formatted.\n");
+        }
+    }else{
+        printf("File pw_data.csv exists\n");
+    }
+
+
     bool displayMenu = true;
     while (displayMenu)
     {
