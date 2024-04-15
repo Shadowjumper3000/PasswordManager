@@ -75,7 +75,7 @@ int main(){
 void displayMainMenu() {
     printf("\n--- Password Manager ---\n");
     printf("1. Add a password\n");
-    printf("2. View all passwords\n");
+    printf("2. View all saved websites\n");
     printf("3. Search for a password\n");
     printf("4. Delete a password\n");
     printf("5. Modify a password\n");
