@@ -2,13 +2,6 @@
 
 A simple password manager implemented in C that uses CSV as storage.
 
-## Collaborators
-
-- David Hörz
-- Hugo Kotuc
-- Ruben de Juan Grande
-- Oskar Kloczko
-
 ## Features
 
 - Securely store and manage passwords
