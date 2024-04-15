@@ -27,7 +27,10 @@ void mh_addingPassword(char fileName[100]){
     printf("Adding a password...\n");
     printf("\nEnter the website name [one word]: \n");
     scanf(" %s", websiteName);
+    char websiteName2[100]; //Used to copy the websiste name to websitename2 because for some reason find row would change the websitename variable and change it to the last thing in the database 
+    strcpy(websiteName2, websiteName);
     int row = db_find_row(fileName, websiteName);
+    printf("WEBSITE NAME: %s\n", websiteName);
     if(row == 0)
     {
         printf("\nEnter the website URL [one word]: \n");
@@ -39,7 +42,7 @@ void mh_addingPassword(char fileName[100]){
         char* encrypted = pw_encrypt(password); //encrypt function using this line
         printf("\nEnter notes [may be multiple words]: \n");
         scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
-        db_addRecord(fileName, websiteName, URL, userName, encrypted, notes);
+        db_addRecord(fileName, websiteName2, URL, userName, encrypted, notes);
         free(encrypted);
     }
     else
@@ -86,7 +89,7 @@ void mh_deletePassword(char fileName[100]){
             case 1:
                 db_deleteRecord(fileName, row);
                 printf("\nAll the data from %s has been succesfully eliminated\n\n", websiteName);
-                db_removeEmptyLines(fileName);
+                //db_removeEmptyLines(fileName);
                 break;
             case 2:
                 printf("\nOk, no problem, we are stoping the process...\n\n");

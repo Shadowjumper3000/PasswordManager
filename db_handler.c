@@ -252,53 +252,6 @@ int db_find_row(char fileName[100], char website_name[100]){
     }
 }
 
-void db_removeEmptyLines(char fileName[100]) {
-    // Open the file for reading and writing
-    FILE *file = fopen(fileName, "r+");
-    if (file == NULL) {
-        if(VERBOSE)perror("Error opening file");
-        exit(-1);
-    }
-
-    // Temporary file to hold modified content
-    FILE *tempFile = tmpfile();
-    if (tempFile == NULL) {
-        if(VERBOSE)perror("Error creating temporary file");
-        fclose(file);
-        exit(-1);
-    }
-
-    // Buffer to read each line from the file
-    char buffer[1000];
-
-    // Iterate through each line in the file
-    while (fgets(buffer, sizeof(buffer), file) != NULL) {
-        // Check if the line is empty (contains only newline character)
-        if (strcmp(buffer, "\n") != 0) {
-            // If the line is not empty, write it to the temporary file
-            fputs(buffer, tempFile);
-        }
-    }
-
-    // Rewind the temporary file to the beginning
-    rewind(tempFile);
-
-    // Move the contents from the temporary file back to the original file
-    rewind(file);
-    int c;
-    while ((c = fgetc(tempFile)) != EOF) {
-        fputc(c, file);
-    }
-
-    // Truncate the original file to remove any remaining content
-    fflush(file);
-    ftruncate(fileno(file), ftell(tempFile));
-
-    // Close files
-    fclose(file);
-    fclose(tempFile);
-}
-
 //csv testing data:
 // Website name,URL,User name,Password,Notes
 // Google,http://www.google.com,myname,mypassword,My google acocunt
