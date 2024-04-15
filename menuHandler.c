@@ -110,6 +110,7 @@ void mh_searchPassword(char fileName[100]){
     }else{
         strcpy(website_name, strtok(website_name, "\n"));
         int row_number = db_find_row(fileName, website_name);
+        printf("The row for %s is: %d\n", website_name, row_number);
         if(row_number > 0){
             char *enc_password = db_getComponent(fileName, row_number, 4);
             char *decrypted = pw_decrypt(enc_password);

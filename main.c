@@ -30,15 +30,14 @@ int main(){
         printf("File pw_data.csv exists\n");
     }
 
-
+    int choice;
     bool displayMenu = true;
     while (displayMenu)
     {
-        int choice;
         displayMainMenu();
 
         printf("Enter your choice: ");
-        scanf(" %d", &choice);
+        scanf(" %i", &choice);
 
         switch (choice) {
             case 1:
@@ -64,7 +63,6 @@ int main(){
                 printf("Exiting the password manager...\n");
                 displayMenu = false;
                 break;
-
             default:
                 printf("Invalid choice. Please try again.\n");
         }

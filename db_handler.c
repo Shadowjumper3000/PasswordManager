@@ -211,6 +211,7 @@ int db_countRows(char fileName[100])
 //This function outputs the number of the row where the website needed is, if the website couldn be found it outputs a 0
 int db_find_row(char fileName[100], char website_name[100]){
     int row_number = 1;
+    int aux_var = 0; //variable to track if the files is empty
     char text_line[500], aux_web_name[100], *token;
 
     strcpy(aux_web_name, website_name);
@@ -226,6 +227,7 @@ int db_find_row(char fileName[100], char website_name[100]){
         fgets(text_line, sizeof(text_line), file); //This one reads the title line
 
         while(!feof(file)){
+            aux_var=1;
             fgets(text_line, sizeof(text_line), file);
             token = strtok(text_line,",");
             /*printf("%s", token);
@@ -242,7 +244,7 @@ int db_find_row(char fileName[100], char website_name[100]){
                 row_number = 0;
             }
         }
-        if(feof(file)){
+        if(aux_var==0){
             row_number = 0;
         }
         fclose(file);
