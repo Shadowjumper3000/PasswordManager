@@ -19,6 +19,7 @@ int main(){
 
         if(file == NULL){
             printf("Error creating file\n");
+            exit(-1);
         } else {
             fprintf(file, "%s,%s,%s,%s,%s", "websiteName", "URL", "userName", "password", "notes");
             fclose(file);
