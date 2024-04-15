@@ -128,20 +128,6 @@ char* db_getComponent(char fileName[100], int row, int column){
 }
 //can be used as delete by changing the component to spaces
 void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column){
-
-    bool hasSpace = false;
-    for(int i = 0; i < 100; i++){
-        if(changedComponent[i] == ' '){
-            hasSpace = true;
-            break;
-        }
-    }
-
-    if(hasSpace){
-        printf("The component cannot contain spaces\n");
-        return;  
-    }
-
     FILE *temp;
     FILE *file = fopen(fileName, "r");
 
@@ -275,9 +261,3 @@ int db_find_row(char fileName[100], char website_name[100]){
         return row_number;
     }
 }
-
-//csv testing data:
-// Website name,URL,User name,Password,Notes
-// Google,http://www.google.com,myname,mypassword,My google acocunt
-// Yahoo,http://www.yahoo.com,myname,mypassword,My yahoo account
-// Facebook,http://www.facebook.com,myname,mypassword,My facebook account
