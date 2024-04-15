@@ -30,7 +30,6 @@ void mh_addingPassword(char fileName[100]){
     char websiteName2[100]; //Used to copy the websiste name to websitename2 because for some reason find row would change the websitename variable and change it to the last thing in the database 
     strcpy(websiteName2, websiteName);
     int row = db_find_row(fileName, websiteName);
-    printf("WEBSITE NAME: %s\n", websiteName);
     if(row == 0)
     {
         printf("\nEnter the website URL [one word]: \n");
