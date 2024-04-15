@@ -252,7 +252,7 @@ int db_find_row(char fileName[100], char website_name[100]){
 
 void db_removeEmptyLines(char fileName[100]) {
     // Open the file for reading and writing
-    FILE *file = fopen(fileName, "r+");
+    FILE *file = fopen(fileName, "r");
     if (file == NULL) {
         if(VERBOSE)perror("Error opening file");
         exit(-1);
