@@ -1,1 +1,5 @@
 websiteName,URL,userName,password,notes
+Yahoo,http://www.yahoo.com,myname,mypassword,My yahoo account
+Gmail,http://www.gmail.com,myemail@gmail.com,strongPassword123,Primary email account for personal use
+Facebook,http://www.facebook.com,myfacebookusername,fbPassword456,Social media account for connecting with friends and family
+Amazon,http://www.amazon.com,amazonshopper@email.com,sj|ufxx|twi,Online shopping account for purchasing goods and managing orders

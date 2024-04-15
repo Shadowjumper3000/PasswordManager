@@ -19,7 +19,6 @@ char* db_getComponent(char fileName[100], int row, int col);
 void db_changeComponent(char fileName[100], char changedComponent[100], int row, int column);
 int db_countRows(char fileName[100]);
 int db_find_row(char fileName[100], char website_name[100]);
-void db_removeEmptyLines(char fileName[100]);
 
 //pw_encryption.c
 char* pw_encrypt(char* password);
