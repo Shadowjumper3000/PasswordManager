@@ -152,6 +152,17 @@ void db_changeComponent(char fileName[100], char changedComponent[100], int row,
             char *data = strtok(buffer, ",");
             int currentColumn = 0;
 
+            if (data == NULL) {
+                continue;
+            }
+
+            // Check if the line is empty
+            if (strcmp(data, "\n") == 0) {
+                fprintf(temp, "\n");
+                currentRow++;
+                continue;
+            }
+
             while(data != NULL){
                 if(currentRow == row - 1 && currentColumn == column - 1){
                     if(currentColumn == 4){
@@ -234,7 +245,6 @@ int db_find_row(char fileName[100], char website_name[100]){
             getchar();*/
             row_number = row_number + 1;
             
-            strcpy(website_name, token); //makes the website name introduced by the user the same as in the document
             token = strupr(token);
 
             if(!strcmp(aux_web_name, token)){
