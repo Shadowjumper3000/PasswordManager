@@ -261,9 +261,3 @@ int db_find_row(char fileName[100], char website_name[100]){
         return row_number;
     }
 }
-
-//csv testing data:
-// Website name,URL,User name,Password,Notes
-// Google,http://www.google.com,myname,mypassword,My google acocunt
-// Yahoo,http://www.yahoo.com,myname,mypassword,My yahoo account
-// Facebook,http://www.facebook.com,myname,mypassword,My facebook account

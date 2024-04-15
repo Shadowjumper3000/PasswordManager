@@ -27,6 +27,7 @@ void mh_addingPassword(char fileName[100]){
     printf("Adding a password...\n");
     printf("\nEnter the website name [one word]: \n");
     scanf(" %s", websiteName);
+    fflush(stdin);
     char websiteName2[100]; //Used to copy the websiste name to websitename2 because for some reason find row would change the websitename variable and change it to the last thing in the database 
     strcpy(websiteName2, websiteName);
     int row = db_find_row(fileName, websiteName);
@@ -34,10 +35,13 @@ void mh_addingPassword(char fileName[100]){
     {
         printf("\nEnter the website URL [one word]: \n");
         scanf(" %s", URL);
+        fflush(stdin);
         printf("\nEnter the username [one word]: \n");
         scanf(" %s", userName);
+        fflush(stdin);
         printf("\nEnter the password [one word]: \n");
         scanf(" %s", password);
+        fflush(stdin);
         char* encrypted = pw_encrypt(password); //encrypt function using this line
         printf("\nEnter notes [may be multiple words]: \n");
         scanf(" %[^\n]s", notes); //used to scan multiple words seperated by a space
